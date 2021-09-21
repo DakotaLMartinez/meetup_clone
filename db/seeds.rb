@@ -11,14 +11,15 @@ sam = User.create(username: "Sam", email: "sam.boahen@flatironschool.com")
 marc = User.create(username: "Marc", email: "marc.majcher@flatironschool.com")
 shivang = User.create(username: "Shivang", email: "shivang.dave@flatironschool.com")
 
-cohort = Group.create(name: 'Online Software Engineering Cohort 071921', location: 'online')
+group = Group.create(name: 'Online Software Engineering 071921', location: 'online')
 
-cohort.members << dakota
-cohort.members << sam
-cohort.members << marc
-cohort.members << shivang
+group.members = [dakota, sam]
 
-lecture_1 = Event.create(
-  title: "Rails Fundamentals", 
-  description: "first lecture",
+lecture_1 = group.events.create(
+  user: dakota,
+  title: 'Rails Fundamentals',
+  start_time: 1.hour.ago,
+  end_time: 1.hour.from_now
 )
+
+lecture_1.attendees = [dakota, sam]
