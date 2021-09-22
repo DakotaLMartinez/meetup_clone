@@ -28,7 +28,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    event = current_user.events.find(params[:id])
+    event = current_user.created_events.find(params[:id])
     event.destroy
     # we'll render the event as json in case we want to enable undo functionality from the frontend.
     render json: event, status: :ok
