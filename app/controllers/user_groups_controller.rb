@@ -8,6 +8,12 @@ class UserGroupsController < ApplicationController
     end
   end
 
+  def destroy
+    user_group = current_user.user_groups.find(params[:id])
+    user_group.destroy
+    render json: user_group, status: :ok
+  end
+
   private
 
   def user_group_params

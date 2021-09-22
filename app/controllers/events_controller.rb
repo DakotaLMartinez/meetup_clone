@@ -18,9 +18,26 @@ class EventsController < ApplicationController
     end
   end
 
+  def update
+    event = current_user.events.find(params[:id])
+    if event.update(event_params)
+      render json: event, status: :ok
+    else
+      render json: event.errors, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    event = current_user.events.find(params[:id])
+    event.destroy
+    # we'll render the event as json in case we want to enable undo functionality from the frontend.
+    render json: event, status: :ok
+  end
+
   private
 
   def event_params
-    params.permit(:title, :description, :location, :start_time, :end_time, :group_id)
+    params.permit(:title, :description, :location, :start_time, :end_time, :group_id, :cover_image_url)
   end
+
 end

@@ -8,9 +8,24 @@ class UserEventsController < ApplicationController
     end
   end
 
+  def update
+    user_event = UserEvent.find(params[:id])
+    if user_event.update(user_event_params)
+      render json: user_event, status: :ok
+    else
+      render json: user_event.errors, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    user_event = current_user.events.find(params[:id])
+    user_event.destroy
+    render json: user_event, status: :ok
+  end
+
   private
 
   def user_event_params
-    params.permit(:event_id)
+    params.permit(:event_id, :attended)
   end
 end
