@@ -13,11 +13,12 @@ shivang = User.create(username: "Shivang", email: "shivang.dave@flatironschool.c
 
 group = Group.create(name: 'Online Software Engineering 071921', location: 'online')
 
-group.members = [dakota, sam]
+group.members = [dakota, sam, marc, shivang]
 
 lecture_1 = group.events.create(
   user: dakota,
   title: 'Rails Fundamentals',
+  description: 'first lecture in phase 4'
   start_time: 1.hour.ago,
   end_time: 1.hour.from_now
 )
