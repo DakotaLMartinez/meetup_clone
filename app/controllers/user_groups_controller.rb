@@ -1,4 +1,8 @@
 class UserGroupsController < ApplicationController
+  def index
+    render json: current_user.user_groups, status: :ok
+  end
+
   def create
     user_group = current_user.user_groups.new(user_group_params)
     if user_group.save
