@@ -1,37 +1,56 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 
-function GroupDetail({ groupId }) {
+function GroupDetail({ groupId, leaveGroup, joinGroup }) {
   const [group, setGroup] = useState(null)
-  
-  useEffect(() => {
+
+  const fetchGroupCallback = useCallback(() => {
     fetch(`/groups/${groupId}`)
       .then(res => res.json())
       .then(group => setGroup(group))
   }, [groupId])
+  
+  useEffect(() => {
+    fetchGroupCallback()
+  }, [fetchGroupCallback])
 
-  if (group) {
-    return (
-      <div>
-        <h1>{group.name}</h1>
-        <h3>{group.founder ? `Founded by: ${group.founder}` : ''}</h3>
-        <h2>Members</h2>
-        <ul>
-          {group.members?.map(member => <li>{member.username}</li>)}
-        </ul>
-        <h2>Events</h2>
-        <ul>
-          {group.events?.map((event) => <li><Link to={`/events/${event.id}`}>{event.title}</Link></li>)}
-        </ul>
-      </div>
-    )
-  } else {
-    return (
-      <div>
-        
-      </div>
-    )
+  const leaveOrJoinButton = (group) => {
+    if (group.user_group) {
+      return (
+        <button
+          onClick={() => leaveGroup(group.id).then(() => fetchGroupCallback())}
+        >
+          Leave Group
+        </button>
+      )
+    } else {
+      return (
+        <button
+          onClick={() => joinGroup(group.id).then(() => fetchGroupCallback())}
+        >
+          Join Group
+        </button>
+      )
+    }
   }
+
+  if(!group){ return <div></div>}
+  
+  return (
+    <div>
+      <h1>{group.name}</h1>
+      {leaveOrJoinButton(group)}
+      <h2>Members</h2>
+      <ul>
+        {group.members?.map(member => <li>{member.username}</li>)}
+      </ul>
+      <h2>Events</h2>
+      <ul>
+        {group.events?.map((event) => <li><Link to={`/events/${event.id}`}>{event.title}</Link></li>)}
+      </ul>
+    </div>
+  )
+  
 }
 
 export default GroupDetail

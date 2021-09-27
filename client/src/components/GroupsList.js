@@ -6,7 +6,7 @@ function GroupsList({ groups, leaveGroup, joinGroup, createGroup }) {
   const [location, setLocation] = useState('')
 
   const leaveOrJoinButton = (group) => {
-    if (group.userGroup) {
+    if (group.user_group) {
       return <button onClick={() => leaveGroup(group.id)}>Leave Group</button>
     } else {
       return <button onClick={() => joinGroup(group.id)}>Join Group</button>

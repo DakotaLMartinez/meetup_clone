@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 
 function EventDetail({ eventId, removeRsvpForEvent, rsvpForEvent, cancelEvent }) {
   const [event, setEvent] = useState(null)
-  const [rsvpTouched, setRsvpTouched] = useState(0)
   const history = useHistory();
 
   const fetchEventCallback = useCallback(
@@ -18,7 +17,7 @@ function EventDetail({ eventId, removeRsvpForEvent, rsvpForEvent, cancelEvent })
 
   useEffect(() => {
     fetchEventCallback()
-  }, [fetchEventCallback, rsvpTouched])
+  }, [fetchEventCallback])
 
 
   const cancelEventButton = (event) => {
@@ -42,8 +41,7 @@ function EventDetail({ eventId, removeRsvpForEvent, rsvpForEvent, cancelEvent })
       return (
         <button
           onClick={() => {
-            removeRsvpForEvent(event.id);
-            setRsvpTouched(rsvpTouched + 1);
+            removeRsvpForEvent(event.id).then(() => fetchEventCallback())
           }
         }>
           Cancel RSVP
@@ -53,8 +51,7 @@ function EventDetail({ eventId, removeRsvpForEvent, rsvpForEvent, cancelEvent })
       return (
         <button
           onClick={() => {
-            rsvpForEvent(event.id)
-            setRsvpTouched(rsvpTouched + 1)
+            rsvpForEvent(event.id).then(() => fetchEventCallback())
           }
         }>
           RSVP for event

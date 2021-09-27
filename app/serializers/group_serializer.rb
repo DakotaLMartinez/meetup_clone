@@ -1,5 +1,4 @@
-class GroupSerializer < ActiveModel::Serializer
-  attributes :id, :name, :location
+class GroupSerializer < GroupIndexSerializer
   has_many :events
   has_many :members
 end
