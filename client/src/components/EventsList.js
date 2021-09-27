@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-function EventsList({ events, groups, removeRsvpForEvent, cancelEvent, rsvpForEvent, createEvent }) {
+function EventsList({ events, groups, removeRsvpToEvent, cancelEvent, rsvpToEvent, createEvent }) {
   const now = new Date();
   now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
   const [title, setTitle] = useState('')
@@ -14,9 +14,9 @@ function EventsList({ events, groups, removeRsvpForEvent, cancelEvent, rsvpForEv
 
   const rsvpOrCancelButton = (event) => {
     if (event.user_event) {
-      return <button onClick={() => removeRsvpForEvent(event.id)}>Cancel RSVP</button>
+      return <button onClick={() => removeRsvpToEvent(event.id)}>Cancel RSVP</button>
     } else {
-      return <button onClick={() => rsvpForEvent(event.id)}>RSVP for event</button>
+      return <button onClick={() => rsvpToEvent(event.id)}>RSVP for event</button>
     }
   }
 

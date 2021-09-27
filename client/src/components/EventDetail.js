@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
-function EventDetail({ eventId, removeRsvpForEvent, rsvpForEvent, cancelEvent }) {
+function EventDetail({ eventId, removeRsvpToEvent, rsvpToEvent, cancelEvent }) {
   const [event, setEvent] = useState(null)
   const history = useHistory();
 
@@ -41,7 +41,7 @@ function EventDetail({ eventId, removeRsvpForEvent, rsvpForEvent, cancelEvent })
       return (
         <button
           onClick={() => {
-            removeRsvpForEvent(event.id).then(() => fetchEventCallback())
+            removeRsvpToEvent(event.id).then(() => fetchEventCallback())
           }
         }>
           Cancel RSVP
@@ -51,7 +51,7 @@ function EventDetail({ eventId, removeRsvpForEvent, rsvpForEvent, cancelEvent })
       return (
         <button
           onClick={() => {
-            rsvpForEvent(event.id).then(() => fetchEventCallback())
+            rsvpToEvent(event.id).then(() => fetchEventCallback())
           }
         }>
           RSVP for event

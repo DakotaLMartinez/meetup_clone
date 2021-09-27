@@ -16,7 +16,7 @@ function EventsContainer() {
       .then(groups => setGroups(groups))
   },[])
 
-  const removeRsvpForEvent = (eventId) => {
+  const removeRsvpToEvent = (eventId) => {
     const event = events.find(event => event.id === eventId)
     return fetch(`/user_events/${event.user_event.id}`, {
       method: "DELETE"
@@ -52,7 +52,7 @@ function EventsContainer() {
         }
       })
   }
-  const rsvpForEvent = (eventId) => {
+  const rsvpToEvent = (eventId) => {
     return fetch('/user_events', {
       method: 'POST',
       headers: {
@@ -118,8 +118,8 @@ function EventsContainer() {
             events={events}
             groups={groups}
             cancelEvent={cancelEvent}
-            removeRsvpForEvent={removeRsvpForEvent}
-            rsvpForEvent={rsvpForEvent}
+            removeRsvpToEvent={removeRsvpToEvent}
+            rsvpToEvent={rsvpToEvent}
             createEvent={createEvent}
           />
         </Route>
@@ -130,8 +130,8 @@ function EventsContainer() {
             return <EventDetail
               eventId={match.params.id}
               cancelEvent={cancelEvent}
-              removeRsvpForEvent={removeRsvpForEvent}
-              rsvpForEvent={rsvpForEvent}
+              removeRsvpToEvent={removeRsvpToEvent}
+              rsvpToEvent={rsvpToEvent}
             />
           }}
         />
