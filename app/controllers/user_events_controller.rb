@@ -22,7 +22,7 @@ class UserEventsController < ApplicationController
   end
 
   def destroy
-    user_event = current_user.events.find(params[:id])
+    user_event = current_user.user_events.find(params[:id])
     user_event.destroy
     render json: user_event, status: :ok
   end

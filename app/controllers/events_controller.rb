@@ -1,12 +1,12 @@
 class EventsController < ApplicationController
   def index
-    events = Event.all
-    render json: events
+    events = Event.all.includes(:user_events)
+    render json: events, each_serializer: EventIndexSerializer
   end
 
   def show
     event = Event.find(params[:id])
-    render json: event, include: :attendees
+    render json: event
   end
 
   def create
@@ -37,7 +37,7 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.permit(:title, :description, :location, :start_time, :end_time, :group_id, :cover_image_url)
+    params.permit(:title, :description, :location, :start_time, :end_time, :group_name, :cover_image_url)
   end
 
 end

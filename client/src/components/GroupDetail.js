@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 function GroupDetail({ groupId }) {
   const [group, setGroup] = useState(null)
@@ -20,7 +21,7 @@ function GroupDetail({ groupId }) {
         </ul>
         <h2>Events</h2>
         <ul>
-          {group.events?.map((event) => <li>{event.title}</li>)}
+          {group.events?.map((event) => <li><Link to={`/events/${event.id}`}>{event.title}</Link></li>)}
         </ul>
       </div>
     )
