@@ -1,25 +1,41 @@
-import './App.css';
-import GroupsContainer from './components/GroupsContainer'
-import EventsContainer from './components/EventsContainer'
-import { Switch, Route, NavLink, BrowserRouter as Router } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import AuthenticatedApp from './AuthenticatedApp'
+import UnauthenticatedApp from './UnauthenticatedApp'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 function App() {
+  const [currentUser, setCurrentUser] = useState(null)
+  const [authChecked, setAuthChecked] = useState(false)
+
+  useEffect(() => {
+    fetch('/me', {
+      credentials: 'include'
+    })
+      .then(res => {
+        if (res.ok) {
+          res.json().then(setCurrentUser)
+        } else {
+          setAuthChecked(true)
+        }
+      })
+  })
+
+  if(!authChecked) { return <div></div>}
   return (
-    <div className="App">
-      <Router>
-        <NavLink to="/groups">Groups</NavLink>{" - "}
-        <NavLink to="/events">Events</NavLink>
-        <Switch>
-          <Route path="/groups">
-            <GroupsContainer />
-          </Route>
-          <Route path="/events">
-            <EventsContainer />
-          </Route>
-        </Switch>
-      </Router>
-    </div>
-  );
+    <Router>
+      {currentUser ? (
+          <AuthenticatedApp
+            setCurrentUser={setCurrentUser}
+            currentUser={currentUser}
+          />
+        ) : (
+          <UnauthenticatedApp
+            setCurrentUser={setCurrentUser}
+          />
+        )
+      }
+    </Router>
+  )
 }
 
-export default App;
+export default App
