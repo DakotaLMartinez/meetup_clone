@@ -48,7 +48,7 @@ function EventsList({ events, groups, removeRsvpToEvent, cancelEvent, rsvpToEven
     <div>
       <h1>Events</h1>
       {events.map(event => (
-        <p><Link to={`events/${event.id}`}>{event.title}</Link> --- {rsvpOrCancelButton(event)} --- {cancelEventButton(event)}</p>
+        <p><Link to={`events/${event.id}`}>{event.title}</Link> --- {rsvpOrCancelButton(event)} {event.user_is_creator && '--- '} {cancelEventButton(event)}</p>
       ))}
       <h3>Add Event</h3>
       <form onSubmit={handleSubmit}>
