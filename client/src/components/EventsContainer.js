@@ -8,10 +8,14 @@ function EventsContainer() {
   const [groups, setGroups] = useState([])
   
   useEffect(() => {
-    fetch(`/events`)
+    fetch(`/events`, {
+      credentials: 'include'
+    })
       .then(res => res.json())
       .then(events => setEvents(events))
-    fetch(`/groups`)
+    fetch(`/groups`, {
+      credentials: 'include'
+    })
       .then(res => res.json())
       .then(groups => setGroups(groups))
   },[])
@@ -19,7 +23,8 @@ function EventsContainer() {
   const removeRsvpToEvent = (eventId) => {
     const event = events.find(event => event.id === eventId)
     return fetch(`/user_events/${event.user_event.id}`, {
-      method: "DELETE"
+      method: "DELETE",
+      credentials: 'include'
     })
       .then(res => {
         if (res.ok) {
@@ -43,7 +48,8 @@ function EventsContainer() {
 
   const cancelEvent = (eventId) => {
     return fetch(`/events/${eventId}`, {
-      method: "DELETE"
+      method: "DELETE",
+      credentials: 'include'
     })
       .then(res => {
         if (res.ok) {
@@ -58,6 +64,7 @@ function EventsContainer() {
       headers: {
         'Content-Type': 'application/json'
       },
+      credentials: 'include',
       body: JSON.stringify({
         event_id: eventId
       })
@@ -93,6 +100,7 @@ function EventsContainer() {
       headers: {
         "Content-Type": "application/json"
       },
+      credentials: 'include',
       body: JSON.stringify(formData)
     })
       .then(res => {

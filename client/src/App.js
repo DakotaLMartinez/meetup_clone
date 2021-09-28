@@ -13,12 +13,15 @@ function App() {
     })
       .then(res => {
         if (res.ok) {
-          res.json().then(setCurrentUser)
+          res.json().then((user) => {
+            setCurrentUser(user)
+            setAuthChecked(true)
+          })
         } else {
           setAuthChecked(true)
         }
       })
-  })
+  }, [])
 
   if(!authChecked) { return <div></div>}
   return (

@@ -5,7 +5,9 @@ function GroupDetail({ groupId, leaveGroup, joinGroup }) {
   const [group, setGroup] = useState(null)
 
   const fetchGroupCallback = useCallback(() => {
-    fetch(`/groups/${groupId}`)
+    fetch(`/groups/${groupId}`, {
+      credentials: 'include'
+    })
       .then(res => res.json())
       .then(group => setGroup(group))
   }, [groupId])

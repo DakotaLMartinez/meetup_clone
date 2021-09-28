@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import Login from './components/Login'
 import Signup from './components/Signup'
 
@@ -12,6 +12,7 @@ function UnauthenticatedApp({ setCurrentUser }) {
       <Route exact path="/signup">
         <Signup setCurrentUser={setCurrentUser}/>
       </Route>
+      <Redirect to="/" />
     </Switch>
   )
 }

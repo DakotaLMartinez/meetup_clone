@@ -1,16 +1,20 @@
 import './App.css';
 import GroupsContainer from './components/GroupsContainer'
 import EventsContainer from './components/EventsContainer'
-import { Switch, Route, NavLink } from 'react-router-dom'
+import { Switch, Route, NavLink, useHistory } from 'react-router-dom'
 
 function AuthenticatedApp({ currentUser, setCurrentUser }) {
+  const history = useHistory()
+  
   const handleLogout = () => {
     fetch(`/logout`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      credentials: 'include'
     })
       .then(res => {
         if (res.ok) {
           setCurrentUser(null)
+          history.push('/')
         }
       })
   }
