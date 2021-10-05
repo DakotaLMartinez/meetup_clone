@@ -1,4 +1,4 @@
-class GroupsController < ApplicationController
+class Api::GroupsController < ApplicationController
   def index
     groups = Group.all.includes(:user_groups)
     render json: groups, each_serializer: GroupIndexSerializer

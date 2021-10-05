@@ -1,4 +1,4 @@
-class UserGroupsController < ApplicationController
+class Api::UserGroupsController < ApplicationController
   def index
     render json: current_user.user_groups, status: :ok
   end

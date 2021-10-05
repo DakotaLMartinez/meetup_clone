@@ -8,7 +8,7 @@ function EventDetail({ eventId, removeRsvpToEvent, rsvpToEvent, cancelEvent }) {
 
   const fetchEventCallback = useCallback(
     () => {
-      fetch(`/events/${eventId}`, {
+      fetch(`/api/events/${eventId}`, {
         credentials: 'include'
       })
         .then(res => res.json())

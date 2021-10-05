@@ -1,4 +1,4 @@
-class EventsController < ApplicationController
+class Api::EventsController < ApplicationController
   before_action :set_event, only: [:show, :update, :destroy]
   before_action :authorize_user, only: [:update, :destroy]
   

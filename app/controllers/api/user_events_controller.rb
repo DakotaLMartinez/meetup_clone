@@ -1,4 +1,4 @@
-class UserEventsController < ApplicationController
+class Api::UserEventsController < ApplicationController
   def index
     render json: current_user.user_events, status: :ok
   end

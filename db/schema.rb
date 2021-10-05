@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_28_073650) do
+ActiveRecord::Schema.define(version: 2021_09_29_005012) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "events", force: :cascade do |t|
     t.string "title"
@@ -18,8 +21,8 @@ ActiveRecord::Schema.define(version: 2021_09_28_073650) do
     t.string "location"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.integer "group_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "group_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["group_id"], name: "index_events_on_group_id"
@@ -34,8 +37,8 @@ ActiveRecord::Schema.define(version: 2021_09_28_073650) do
   end
 
   create_table "user_events", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "event_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "attended"
@@ -44,8 +47,8 @@ ActiveRecord::Schema.define(version: 2021_09_28_073650) do
   end
 
   create_table "user_groups", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "group_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "group_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["group_id"], name: "index_user_groups_on_group_id"
@@ -59,6 +62,7 @@ ActiveRecord::Schema.define(version: 2021_09_28_073650) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest"
+    t.boolean "admin"
   end
 
   add_foreign_key "events", "groups"

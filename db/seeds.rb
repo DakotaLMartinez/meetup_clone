@@ -6,10 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-dakota = User.create(username: "Dakota", email: "dakota@flatironschool.com")
-sam = User.create(username: "Sam", email: "sam.boahen@flatironschool.com")
-marc = User.create(username: "Marc", email: "marc.majcher@flatironschool.com")
-shivang = User.create(username: "Shivang", email: "shivang.dave@flatironschool.com")
+dakota = User.create(username: "Dakota", email: "dakota@flatironschool.com", password: "password")
+sam = User.create(username: "Sam", email: "sam.boahen@flatironschool.com", password: "password")
+marc = User.create(username: "Marc", email: "marc.majcher@flatironschool.com", password: "password")
+shivang = User.create(username: "Shivang", email: "shivang.dave@flatironschool.com", password: "password")
 
 group = Group.create(name: 'Online Software Engineering 071921', location: 'online')
 
